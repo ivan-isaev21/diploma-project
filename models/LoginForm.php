@@ -34,6 +34,16 @@ class LoginForm extends Model
             ['password', 'validatePassword'],
         ];
     }
+      /**
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
+    {
+        return [
+            'username'=>'Логин',
+            'password'=>'Пароль'
+        ];
+    }
 
     /**
      * Validates the password.

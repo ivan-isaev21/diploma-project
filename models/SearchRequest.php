@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Tour;
+use app\models\Request;
 
 /**
- * SearchTour represents the model behind the search form of `app\models\Tour`.
+ * SearchRequest represents the model behind the search form of `app\models\Request`.
  */
-class SearchTour extends Tour
+class SearchRequest extends Request
 {
     /**
      * {@inheritdoc}
@@ -18,7 +18,7 @@ class SearchTour extends Tour
     {
         return [
             [['id'], 'integer'],
-            [['title', 'description', 'images'], 'safe']         
+            [['name', 'text', 'email', 'phone_number'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class SearchTour extends Tour
      */
     public function search($params)
     {
-        $query = Tour::find();
+        $query = Request::find();
 
         // add conditions that should always apply here
 
@@ -58,12 +58,13 @@ class SearchTour extends Tour
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id            
+            'id' => $this->id,
         ]);
 
-        $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'images', $this->images]);
+        $query->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'text', $this->text])
+            ->andFilterWhere(['like', 'email', $this->email])
+            ->andFilterWhere(['like', 'phone_number', $this->phone_number]);
 
         return $dataProvider;
     }

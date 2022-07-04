@@ -105,8 +105,10 @@ class TourController extends Controller
         if (!empty($model->images)) {
             $file = new File();
             $images = $file->getPath($model->images);
-            foreach ($images as $img) {
-                $wrap[] = '<img  src="' . $img . '"/>';
+            foreach ($images as $img) {                
+                $wrap[]='<div class="item-responsive item-16by9">
+                <div class="content" style="background: url('.$img.');"></div>
+              </div>';
             }
         }
 

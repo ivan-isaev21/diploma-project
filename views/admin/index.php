@@ -20,7 +20,7 @@ use yii\helpers\Url;
             <rect width="100%" height="100%" fill="#e83e8c"></rect><text x="50%" y="50%" fill="#e83e8c" dy=".3em">32x32</text>
         </svg>
         <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-            <a class="text-info" href="<?= Url::to(['tour/index']) ?>"> Управление заказами </a>
+            <a class="text-info" href="<?= Url::to(['request/index']) ?>"> Управление заказами </a>
         </p>
     </div>
     <div class="media text-muted pt-3">

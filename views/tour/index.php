@@ -8,43 +8,33 @@ use kartik\icons\Icon;
 /* @var $searchModel app\models\SearchTour */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Экскурсии';
+$this->title = 'Управление  экскурсиями';
+$this->params['breadcrumbs'][] = ['label' => 'Админ панель', 'url' => ['/admin/index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 <div class="tour-index">
-
     <h1><?= Html::encode($this->title) ?></h1>
-
     <p>
         <?= Html::a('Добавить', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-
-    <?php Pjax::begin(); ?>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php Pjax::begin(); ?>   
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-           
-            'title',                       
-            'price',
-
+            'title',            
             [
                 'class' => 'yii\grid\ActionColumn',
                 'buttons' => [
                     'view' => function ($url, $model) {
-                        return Html::a(Icon::show('eye'), $url, [
-                                   
-                        ]);
+                        return Html::a(Icon::show('eye'), $url, []);
                     },
-     
                     'update' => function ($url, $model) {
                         return Html::a(Icon::show('edit'), $url, [
-                                    'title' => 'Редактировать',
+                            'title' => 'Редактировать',
                         ]);
                     },
                     'delete' => function ($url, $model) {
@@ -52,15 +42,14 @@ $this->params['breadcrumbs'][] = $this->title;
                             'title' => 'Удалить',
                             'data' => [
                                 'confirm' => 'Вы действительно хотите удалить экскурсию?',
-                                'method'=>'POST'
+                                'method' => 'POST'
                             ],
                         ]);
-                    }]
-        
-        ],
+                    }
+                ]
+            ],
         ],
     ]); ?>
 
     <?php Pjax::end(); ?>
-
 </div>

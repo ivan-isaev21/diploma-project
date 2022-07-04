@@ -7,6 +7,8 @@ use yii\helpers\Url;
 /* @var $model app\models\Tour */
 
 $this->title = 'Добавить экскурсию ';
+$this->params['breadcrumbs'][] = ['label' => 'Админ панель', 'url' => ['/admin/index']];
+$this->params['breadcrumbs'][] = ['label' => 'Управление экскурсиями', 'url' => ['/tour/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="tour-create">

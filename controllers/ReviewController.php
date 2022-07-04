@@ -56,9 +56,9 @@ class ReviewController extends Controller
   
 
     /**
-     * Creates a new Review model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
+     * Обработчик для создания отзыва
+     *
+     * @return void
      */
     public function actionCreate()
     {
@@ -69,9 +69,7 @@ class ReviewController extends Controller
         if(!$tour_id or $is_exist){
            return  $this->goHome();      
         }
-
         $tour = Tour::find()->where(['id'=>$tour_id])->one();
-
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Review::setAverageRating($tour_id);
@@ -93,9 +91,14 @@ class ReviewController extends Controller
      */
     public function actionDelete($ip,$tour_id)
     {
+        
+        if (Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
         $model=Review::find()->where(['ip'=>$ip,'tour_id'=>$tour_id])->one(); 
-        Review::setAverageRating($tour_id);       
-        $model->delete();
+         
+        $model->delete(); 
+        Review::setAverageRating($tour_id);   
 
         return $this->redirect(['index','tour_id'=>$tour_id]);
     }

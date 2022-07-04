@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use app\models\Tour;
 
 /**
  * This is the model class for table "reviews".
@@ -30,7 +31,7 @@ class Review extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['ip', 'tour_id', 'comment', 'rating'], 'required'],
+            [['ip', 'name','tour_id', 'comment', 'rating'], 'required'],
             [['tour_id', 'rating'], 'integer'],
             [['name'], 'string', 'max' => 255],
             [['comment'], 'string', 'max' => 3000],
@@ -76,8 +77,8 @@ class Review extends \yii\db\ActiveRecord
     {
         $rating = round(self::getAverageRating($tour_id));
         $tour = Tour::find()->where(['id' => $tour_id])->one();
-        $tour->rating = $rating;
-        if ($tour->save()) {
+        $tour->rating = $rating;        
+        if ($tour->save(false)) {
             return true;
         }
         return false;

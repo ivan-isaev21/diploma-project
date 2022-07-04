@@ -35,8 +35,7 @@ class Tour extends \yii\db\ActiveRecord
             [['title','short_description'], 'required'],
             [['description',], 'string'],            
             [['map_code','description'],'safe'],   
-            [['images'], 'safe'],    
-            [['price'], 'number'],
+            [['images'], 'safe'],   
             [['rating'], 'integer','min'=>1,'max'=>5],
             [['short_description'], 'string', 'max' => 255],
             [['title'], 'string', 'max' => 100],
@@ -54,8 +53,7 @@ class Tour extends \yii\db\ActiveRecord
             'short_description' => 'Краткое описание',
             'description' => 'Описание',
             'images' => 'Массив картинок',
-            'map_code'=>'HTML код карт',
-            'price' => 'Цена',
+            'map_code'=>'HTML код карт',            
             'rating' => 'Рейтинг',
         ];
     }    

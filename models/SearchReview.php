@@ -32,7 +32,7 @@ class SearchReview extends Review
     }
 
     /**
-     * Creates data provider instance with search query applied
+     * Функция для поиска отзывов
      *
      * @param array $params
      *
@@ -41,9 +41,7 @@ class SearchReview extends Review
     public function search($params)
     {
         $tour_id=Yii::$app->request->get('tour_id');  
-        $query = Review::find()->with('tour')->where(['tour_id'=>$tour_id]);
-
-        // add conditions that should always apply here
+        $query = Review::find()->with('tour')->where(['tour_id'=>$tour_id]);       
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -51,13 +49,11 @@ class SearchReview extends Review
 
         $this->load($params);
 
-        if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
+        if (!$this->validate()) {            
             return $dataProvider;
         }
 
-        // grid filtering conditions
+        // Условия для поиска
         $query->andFilterWhere([
             'tour_id' => $this->tour_id,
             'rating' => $this->rating,

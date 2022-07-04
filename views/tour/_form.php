@@ -68,9 +68,7 @@ use yii\helpers\Url;
     <?php
     Modal::end();
     ?>
-    <?= $form->field($model, 'map_code')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'price')->textInput(['maxlength' => true, 'class' => ' form-control w-25']) ?> 
+    <?= $form->field($model, 'map_code')->textarea(['rows' => 6]) ?>    
 
     <div class="form-group">
         <?= Html::submitButton(Icon::show('save') . 'Сохранить', ['class' => 'btn btn-success']) ?>

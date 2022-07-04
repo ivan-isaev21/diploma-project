@@ -34,18 +34,21 @@ FontAwesomeAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([        
-        'brandLabel' => Icon::show('route').'БАХМУТСКИЙ ЦЕНТР ТУРИЗМА',
+        //'brandLabel' => Icon::show('route').'БАХМУТСКИЙ ЦЕНТР ТУРИЗМА',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
         'class' => 'navbar navbar-expand-lg navbar-dark bg-primary fixed-top',
         ],
     ]);
     echo Nav::widget([
-        'options' => ['class' => 'navbar-nav ml-auto'],
-        'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
+        'options' => ['class' => 'navbar-nav ml-auto ' ],
+        'encodeLabels' => false,
+        'items' => [            
+            ['label' => Icon::show('info-circle').'О нас', 'url' => ['/site/about']],
+            ['label' => Icon::show('file-signature').'Обратная связь', 'url' => ['/request/create']],
+            !Yii::$app->user->isGuest ? (
+                ['label' => Icon::show('tools').'Админ панель', 'url' => ['/admin/index']]
+            ):''
                 
         ]]);
     NavBar::end();
@@ -54,15 +57,14 @@ FontAwesomeAsset::register($this);
     <div class="container">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= Alert::widget() ?>
+        ]) ?>        
         <?= $content ?>
     </div>
 </div>
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>        
+        <p class="pull-left">&copy; Isaev Ivan diplom work <?= date('Y') ?></p>        
     </div>
 </footer>
 

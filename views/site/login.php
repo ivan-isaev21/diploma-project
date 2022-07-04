@@ -10,11 +10,12 @@ use yii\bootstrap4\ActiveForm;
 $this->title = 'Админ панель';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
 <div class="site-login">
+    
     <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>Вход в админ панель:</p>
-
+    
+    <div class="form-group my-5">
     <?php $form = ActiveForm::begin([
         'id' => 'login-form',
         'layout' => 'horizontal',
@@ -25,14 +26,8 @@ $this->params['breadcrumbs'][] = $this->title;
     ]); ?>
 
         <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
-
-        <?= $form->field($model, 'password')->passwordInput() ?>       
-
-        <div class="form-group">
-            <div class="">
-                <?= Html::submitButton('Авторизоваться', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
-            </div>
-        </div>
-
-    <?php ActiveForm::end(); ?>    
+        <?= $form->field($model, 'password')->passwordInput() ?>    
+        <?= Html::submitButton('Авторизоваться', ['class' => 'btn btn-primary my-2 text-center col-lg-3 offset-lg-1 ', 'name' => 'login-button']) ?>          
+    <?php ActiveForm::end(); ?> 
+    </div>   
 </div>

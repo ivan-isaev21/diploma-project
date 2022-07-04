@@ -31,14 +31,14 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
         <?php endif;?>
 
-    <div class="card mb-4">
+    <div class="card mb-4">        
         <?php if (!empty($images)) : ?>
             <figure>
                 <?= Carousel::widget([
                     'items' => $images,
                     'options' => [
                         'id' => 'viewCarousel'
-                    ]
+                    ]                   
                 ]) ?>
             </figure>
         <?php endif; ?>
@@ -67,18 +67,17 @@ $this->params['breadcrumbs'][] = $this->title;
                             ]]
                         ])?>  <a  class="text-info" href="<?= Url::to(['review/index', 'tour_id' => $model->id]) ?>">
                          Всего отзывов: (<?=Review::getCount($model->id)?>)</a>
+                         <div class="addthis_inline_share_toolbox py-2"></div>
             <p class="card-text">
                 <?= Html::decode($model->description) ?>
             </p>
-            <p class="text-center">
+            <div class="table-responsive text-center">       
                 <?= Html::decode($model->map_code) ?>
-            </p>
+            </div>
         </div>
         <div class="card-footer text-muted">
-            <a href="#">заказать</a>
+        
         </div>
     </div>
-
-
-
 </div>
+<?php $this->registerJsFile('https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5fc0203dbc709edc');?>

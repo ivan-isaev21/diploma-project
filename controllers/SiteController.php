@@ -16,7 +16,7 @@ use app\models\Tour;
 use yii\data\Pagination;
 
 class SiteController extends Controller
-{    
+{
     /**
      * {@inheritdoc}
      */
@@ -60,31 +60,31 @@ class SiteController extends Controller
     }
 
     /**
-     * Displays homepage.
+     * Обработчик для главной страницы
      *
      * @return string
      */
     public function actionIndex()
-    {       
-        
+    {
+
         $query = Tour::find();
         $searchModel = new SearchMainForm();
 
-        if($searchModel->load(Yii::$app->request->queryParams) and $searchModel->validate()){
-            $query->andFilterWhere(['like', 'title', $searchModel->title]);
-            $query->andFilterWhere(['like', 'description', $searchModel->title]);            
-        }      
+        if ($searchModel->load(Yii::$app->request->queryParams) and $searchModel->validate()) {
+            $query->andFilterWhere(['like', 'title', $searchModel->title]);           
+        }
         $countQuery = clone $query;
-        $pages = new Pagination(['totalCount' => $countQuery->count(),'pageSizeLimit' => [1, 6]]);
+        $pages = new Pagination(['totalCount' => $countQuery->count(), 'pageSizeLimit' => [1, 6]]);
         $models = $query->offset($pages->offset)
-        ->limit($pages->limit)
-        ->all();        
-        return $this->render('index',[
+            ->limit($pages->limit)
+            ->orderBy(['rating'=>SORT_DESC])
+            ->all();
+        return $this->render('index', [
             'searchModel' => $searchModel,
-            'models'=>$models,            
-            'pages'=>$pages
-            ]);
-    }   
+            'models' => $models,
+            'pages' => $pages
+        ]);
+    }
     /**
      * Login action.
      *
@@ -98,7 +98,7 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            $this->goHome();
+            return $this->redirect(['/admin/index']);
         }
 
         $model->password = '';
@@ -118,24 +118,6 @@ class SiteController extends Controller
 
         return $this->goHome();
     }
-
-    /**
-     * Displays contact page.
-     *
-     * @return Response|string
-     */
-    public function actionContact()
-    {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
-
-            return $this->refresh();
-        }
-        return $this->render('contact', [
-            'model' => $model,
-        ]);
-    }  
 
     /**
      * Displays about page.
